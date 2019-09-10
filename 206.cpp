@@ -11,18 +11,20 @@
 #include <iostream>
 
 using namespace std;
+
 struct ListNode {
     int val;
-     ListNode *next;
-     ListNode(int x) : val(x), next(NULL) {}
+    ListNode *next;
+
+    ListNode(int x) : val(x), next(NULL) {}
 };
 
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
+    ListNode *reverseList(ListNode *head) {
         ListNode *new_head = NULL;
         while (head) {
-            ListNode * next = head->next;
+            ListNode *next = head->next;
             head->next = new_head;
             new_head = head;
             head = next;
@@ -59,14 +61,14 @@ vector<int> stringToIntegerVector(string input) {
     return output;
 }
 
-ListNode* stringToListNode(string input) {
+ListNode *stringToListNode(string input) {
     // Generate list from the input
     vector<int> list = stringToIntegerVector(input);
 
     // Now convert that list into linked list
-    ListNode* dummyRoot = new ListNode(0);
-    ListNode* ptr = dummyRoot;
-    for(int item : list) {
+    ListNode *dummyRoot = new ListNode(0);
+    ListNode *ptr = dummyRoot;
+    for (int item : list) {
         ptr->next = new ListNode(item);
         ptr = ptr->next;
     }
@@ -75,7 +77,7 @@ ListNode* stringToListNode(string input) {
     return ptr;
 }
 
-string listNodeToString(ListNode* node) {
+string listNodeToString(ListNode *node) {
     if (node == nullptr) {
         return "[]";
     }
@@ -88,11 +90,11 @@ string listNodeToString(ListNode* node) {
     return "[" + result.substr(0, result.length() - 2) + "]";
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     string line(argv[1]);
-    ListNode* head = stringToListNode(line);
+    ListNode *head = stringToListNode(line);
 
-    ListNode* ret = Solution().reverseList(head);
+    ListNode *ret = Solution().reverseList(head);
 
     string out = listNodeToString(ret);
     cout << out << endl;

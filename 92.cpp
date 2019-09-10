@@ -22,6 +22,7 @@ public:
         if (!head || head->next == NULL || n <= m || m < 0 || n < 0) return head;
 
         ListNode *p, *tmp, *pre_head, *tail, *h = new ListNode(-1);
+        // 制造一个前置, 防止首元素就可以循环
         h->next = head;
         pre_head = h;
         p = h;
@@ -38,7 +39,9 @@ public:
         }
         tail->next = p;
 
-        return h->next;
+        ListNode * ret = h->next;
+        if (h) delete(h);
+        return ret;
     }
 };
 

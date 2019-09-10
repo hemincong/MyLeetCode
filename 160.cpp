@@ -37,18 +37,18 @@ public:
         auto b_len = get_list_len(headB);
 
         if (a_len == 0 || b_len == 0) return NULL;
-        ListNode * p_b = NULL;
-        ListNode * p_a = NULL;
-        ListNode * p_tmp_1 = NULL;
-        ListNode * p_tmp_2 = NULL;
+        ListNode *p_b = NULL;
+        ListNode *p_a = NULL;
+        ListNode *p_tmp_1 = NULL;
+        ListNode *p_tmp_2 = NULL;
+        // 尾端对齐
         if (a_len > b_len) {
             p_tmp_1 = headA;
             for (int i = 0; i < a_len - b_len; i++) {
                 p_tmp_1 = p_tmp_1->next;
             }
             p_tmp_2 = headB;
-        }
-        else {
+        } else {
             p_tmp_1 = headA;
             p_tmp_2 = headB;
             for (int i = 0; i < b_len - a_len; i++) {
@@ -56,6 +56,7 @@ public:
             }
         }
 
+        // 找到从能对齐的开始找到共同开始的地方
         while (p_tmp_1 != p_tmp_2 && p_tmp_1 && p_tmp_2) {
             p_tmp_1 = p_tmp_1->next;
             p_tmp_2 = p_tmp_2->next;
@@ -129,7 +130,7 @@ string listNodeToString(ListNode *node) {
     return "[" + result.substr(0, result.length() - 2) + "]";
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     ListNode a1(1);
     ListNode a2(2);
     ListNode b1(3);
@@ -146,9 +147,9 @@ int main(int argc, char** argv) {
     b2.next = &b3;
     b3.next = &c1;
 
-        ListNode *ret = Solution().getIntersectionNode(&a1, &b1);
+    ListNode *ret = Solution().getIntersectionNode(&a1, &b1);
 
-        string out = listNodeToString(ret);
-        cout << out << endl;
+    string out = listNodeToString(ret);
+    cout << out << endl;
     return 0;
 }
