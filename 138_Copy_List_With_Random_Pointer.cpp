@@ -36,8 +36,8 @@ public:
 
         Node *new_head = nullptr;
         Node *pre = nullptr;
-        map<Node*, Node*> random_map;
-        map<Node*, Node*> new_node_old_node_map;
+        map<Node *, Node *> random_map;
+        map<Node *, Node *> new_node_old_node_map;
         while (head) {
             auto new_node = new Node();
             new_node->random = NULL;
@@ -59,7 +59,7 @@ public:
             head = head->next;
         }
 
-        for (auto& n : random_map) {
+        for (auto &n : random_map) {
             const auto new_node_p = new_node_old_node_map.find(n.second);
             if (new_node_p != new_node_old_node_map.end()) {
                 n.first->random = new_node_p->second;
@@ -90,7 +90,7 @@ int main() {
     //c.random = &c;
     //e.random = &d;
     Solution solve;
-    Node * old_head = &a;
+    Node *old_head = &a;
     while (old_head) {
         printf("label = %d ", old_head->val);
         if (old_head->random) {

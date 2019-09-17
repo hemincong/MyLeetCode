@@ -39,8 +39,8 @@ public:
         }
         tail->next = p;
 
-        ListNode * ret = h->next;
-        if (h) delete(h);
+        ListNode *ret = h->next;
+        if (h) delete (h);
         return ret;
     }
 };
