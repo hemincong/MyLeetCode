@@ -22,7 +22,7 @@ public:
         auto new_head = make_shared<ListNode>(-1);
         auto curr_ptr = new_head.get();
 
-        while(l1_p && l2_p) {
+        while (l1_p && l2_p) {
             if (l1_p->val < l2_p->val) {
                 curr_ptr->next = l1_p;
                 curr_ptr = curr_ptr->next;
@@ -46,7 +46,7 @@ public:
     }
 };
 
-int main(){
+int main() {
     ListNode a(1);
     ListNode b(2);
     ListNode c(4);
@@ -60,11 +60,11 @@ int main(){
     e.next = &f;
 
     Solution solve;
-    //ListNode *head = solve.mergeTwoLists(&a, &d);
+    ListNode *head = solve.mergeTwoLists(&a, &d);
     //ListNode *head = solve.mergeTwoLists(NULL, NULL);
     //ListNode *head = solve.mergeTwoLists(&a, NULL);
-    ListNode *head = solve.mergeTwoLists(NULL, &d);
-    while(head){
+    //ListNode *head = solve.mergeTwoLists(NULL, &d);
+    while (head) {
         printf("%d\n", head->val);
         head = head->next;
     }
