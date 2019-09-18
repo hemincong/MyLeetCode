@@ -49,7 +49,7 @@ private:
  * bool param_4 = obj->empty();
  */
 
-int main(){
+int main() {
     MyStack S;
     S.push(1);
     S.push(2);
