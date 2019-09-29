@@ -2,7 +2,6 @@
 // Created by mincong.he on 2019/9/19.
 //
 
-#include <string>
 #include <stack>
 #include <iostream>
 #include "Algo_Utils.h"
@@ -17,6 +16,22 @@ class Solution {
     };
 
 public:
+
+    Solution() :
+            _status(STATUS_BEGIN),
+            _num_curr(0),
+            _need_more_num(false) {
+
+    }
+
+    void clear() {
+        _status = STATUS_BEGIN;
+        _num_curr = 0;
+        while (!_num_s.empty()) _num_s.pop();
+        while (!_opt_s.empty()) _opt_s.pop();
+        _need_more_num = false;
+    }
+
     int calculate(std::string s) {
         _status = STATUS_BEGIN;
         auto s_len = s.length();
@@ -68,10 +83,7 @@ public:
                     } else if (c_curr == '(') {
                         _need_more_num = false;
                         _status = STATUS_NUM;
-                    } else if (c_curr == '+' ||
-                               c_curr == '-' ||
-                               c_curr == '*' ||
-                               c_curr == '/') {
+                    } else if (c_curr == '+' || c_curr == '-') {
                         _need_more_num = true;
                         _opt_s.push(c_curr);
                     } else if (c_curr >= '0' && c_curr <= '9') {
@@ -116,12 +128,6 @@ private:
             case '-':
                 ret = num1 - num2;
                 break;
-            case '*':
-                ret = num1 * num2;
-                break;
-            case '/':
-                ret = num1 / num2;
-                break;
             default:
                 break;
         }
@@ -137,11 +143,21 @@ private:
 
 int main(int argc, char **argv) {
     Solution solution;
-    //auto ret = solution.calculate("1-(3+5-2+(3+19-(3-1-4+(9-4-(4-(1+(3)-2)-5)+8-(3-5)-1)-4)-5)-4+3-9)-4-(3+2-5)-10"); // -15
-    //auto ret = solution.calculate("1+1"); // 2
-    //auto ret = solution.calculate("(1+1)"); // 2
-    //auto ret = solution.calculate("  2-1 + 2 "); // 3
-    auto ret = solution.calculate("(1+(4+5+2)-3)+(6+8)"); // 23
-    printf("%d", ret);
+    auto ret = solution.calculate(
+            "1-(3+5-2+(3+19-(3-1-4+(9-4-(4-(1+(3)-2)-5)+8-(3-5)-1)-4)-5)-4+3-9)-4-(3+2-5)-10"); // -15
+    assert(ret == -15);
+    solution.clear();
+    ret = solution.calculate("1+1"); // 2
+    assert(ret == 2);
+    solution.clear();
+    ret = solution.calculate("(1+1)"); // 2
+    assert(ret == 2);
+    solution.clear();
+    ret = solution.calculate("  2-1 + 2 "); // 3
+    assert(ret == 3);
+    solution.clear();
+    ret = solution.calculate("(1+(4+5+2)-3)+(6+8)"); // 23
+    assert(ret == 23);
+    solution.clear();
     return EXIT_SUCCESS;
 }
