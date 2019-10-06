@@ -35,20 +35,13 @@ public:
 
 int main(int argc, char **argv) {
     Solution solve;
-    vector<int> nums_1;
-    nums_1.emplace_back(2);
-    nums_1.emplace_back(7);
-    nums_1.emplace_back(11);
-    nums_1.emplace_back(15);
+    vector<int> nums_1 = {2, 7, 11, 15};
     auto ret = solve.twoSum(nums_1, 9);
     for (auto &n: ret) {
         std::cout << n << std::endl;
     }
 
-    vector<int> nums_2;
-    nums_2.emplace_back(3);
-    nums_2.emplace_back(3);
-    nums_2.emplace_back(15);
+    vector<int> nums_2 = {3, 3, 15};
     auto ret_2 = solve.twoSum(nums_1, 2);
     for (auto &n: ret_2) {
         std::cout << n << std::endl;
