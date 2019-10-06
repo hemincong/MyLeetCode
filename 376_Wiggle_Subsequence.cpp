@@ -3,14 +3,9 @@
 //
 
 #include <vector>
+#include <iostream>
 
 using namespace std;
-
-enum number_status {
-    status_begin,
-    status_greater_than_zero,
-    status_less_than_zero,
-};
 
 class Solution {
 public:
@@ -18,34 +13,52 @@ public:
         if (nums.size() < 2) {
             return nums.size();
         }
-        number_status s = status_begin;
-        int longest = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            switch (s) {
-                case status_begin:
-                    if (nums[i - 1] < nums[i]) {
-                        s = status_greater_than_zero;
-                        longest++;
-                    } else if (nums[i - 1] > nums[i]) {
-                        s = status_less_than_zero;
-                        longest++;
-                    }
-                    break;
-                case status_greater_than_zero:
-                    if (nums[i - 1] > nums[i]) {
-                        s = status_less_than_zero;
-                        longest++;
-                    }
-                    break;
-                case status_less_than_zero:
-                    if (nums[i - 1] < nums[i]) {
-                        s = status_greater_than_zero;
-                        longest++;
-                    }
-                    break;
+        std::vector<int> ret;
+
+        auto p = nums.begin();
+        p++;
+        auto b = nums.begin();
+
+        while (p != nums.end()) {
+            if (*p > *b) {
+                ret.emplace_back(1);
+            } else if (*p == *b) {
+                //ret.emplace_back(0);
+            } else {
+                ret.emplace_back(-1);
             }
+
+            b++;
+            p++;
         }
-        return longest;
+
+        if (ret.empty()) return 1;
+
+        int total = 2;
+        auto r_p = ret.begin();
+        r_p++;
+        auto r_b = ret.begin();
+
+        for (const auto &n: nums) {
+            std::cout << n << " ";
+        }
+        std::cout << std::endl;
+
+        for (const auto &n: ret) {
+            std::cout << n << " ";
+        }
+        std::cout << std::endl;
+        std::cout << std::endl;
+
+        while (r_p != ret.end()) {
+            if (*r_p != *r_b) {
+                total++;
+            }
+            r_b++;
+            r_p++;
+        }
+
+        return total;
     }
 };
 
