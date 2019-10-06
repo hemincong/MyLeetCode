@@ -69,6 +69,7 @@ int main(int argc, char **argv) {
     std::vector<int> nums_4 = {0, 0}; // 1
     std::vector<int> nums_5 = {0, 0, 0}; // 1
     std::vector<int> nums_6 = {1, 0, 0}; // 2
+    std::vector<int> nums_7 = {0, 0, 1}; // 2
 
     Solution solve;
     auto ret_1 = solve.wiggleMaxLength(nums_1);
@@ -88,6 +89,9 @@ int main(int argc, char **argv) {
 
     auto ret_6 = solve.wiggleMaxLength(nums_6);
     assert(ret_6 == 2);
+
+    auto ret_7 = solve.wiggleMaxLength(nums_7);
+    assert(ret_7 == 2);
 
     return EXIT_SUCCESS;
 }
