@@ -50,13 +50,17 @@ int main(int argc, char **argv) {
     points.emplace_back((std::vector<int>({2, 8})));
     points.emplace_back((std::vector<int>({1, 6})));
     points.emplace_back((std::vector<int>({7, 12})));
-    printf("%d\n", s.findMinArrowShots(points));
+    auto ret_1 = s.findMinArrowShots(points);
+    printf("ret 1 : %d\n", ret_1);
+    assert(ret_1 == 2);
 
     std::vector<std::vector<int> > points_2;
     points_2.emplace_back((std::vector<int>({1, 2})));
     points_2.emplace_back((std::vector<int>({2, 3})));
     points_2.emplace_back((std::vector<int>({3, 4})));
     points_2.emplace_back((std::vector<int>({4, 5})));
-    printf("%d\n", s.findMinArrowShots(points_2));
+    auto ret_2 = s.findMinArrowShots(points_2);
+    printf("ret 2 : %d\n", ret_2);
+    assert(ret_2 == 2);
     return EXIT_SUCCESS;
 }
