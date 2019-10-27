@@ -30,11 +30,39 @@ private:
     }
 };
 
+class Solution2 {
+public:
+    vector<vector<int>> subsets(vector<int> &nums) {
+        std::vector<std::vector<int>> result;
+        int all_set = 1 << nums.size();
+        for (int i = 0; i < all_set; i++) {
+            std::vector<int> item;
+            for (int j = 0; j < i; j++) {
+                if (i & (1 << j)) {
+                    item.push_back(nums[j]);
+                }
+            }
+            result.push_back(item);
+        }
+        return result;
+    }
+};
+
 int main(int argc, char **argv) {
     std::vector<int> nums = {1, 2, 3};
     Solution solution;
     auto ret = solution.subsets(nums);
     for (const auto &i : ret) {
+        std::cout << "[";
+        for (const auto &j : i) {
+            std::cout << j;
+        }
+        std::cout << "]";
+    }
+    std::cout << std::endl;
+    Solution2 solution2;
+    auto ret2 = solution2.subsets(nums);
+    for (const auto &i : ret2) {
         std::cout << "[";
         for (const auto &j : i) {
             std::cout << j;
