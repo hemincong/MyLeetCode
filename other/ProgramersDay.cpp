@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> sum_25() {
-        auto r = std::vector<std::vector<int>>()
+        auto r = std::vector<std::vector<int>>();
         auto item = std::vector<int>();
         generate(0, item, 0, r);
         return r;
@@ -46,5 +46,6 @@ int main(int argc, char **argv) {
         }
         std::cout << "]" << std::endl;
     }
+    std::cout << "total: " << ret.size() << std::endl;
     return EXIT_SUCCESS;
 }
