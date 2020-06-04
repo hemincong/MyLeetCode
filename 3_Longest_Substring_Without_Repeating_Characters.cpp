@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
     return RUN_ALL_TESTS();
 }
 
-TEST(TestRand, rand_test_1) {
+TEST(Test, test_1) {
     Solution solution;
     EXPECT_EQ(solution.lengthOfLongestSubstring("bbbbb"), 1);
     EXPECT_EQ(solution.lengthOfLongestSubstring("abcabcbb"), 3);
