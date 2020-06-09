@@ -5,6 +5,10 @@
 #ifndef LEETCODE_ALGO_UTILS_H
 #define LEETCODE_ALGO_UTILS_H
 
+#define EXPECT_EQ(ret, expect) \
+    if ((expect) != (ret)) \
+        printf("%s:%d Not equal, ret: %d, expect: %d\n", __FILE__, __LINE__, (ret), (expect));
+
 #include <stack>
 #include <queue>
 #include <ostream>
