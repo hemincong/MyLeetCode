@@ -5,13 +5,16 @@
 #ifndef LEETCODE_ALGO_UTILS_H
 #define LEETCODE_ALGO_UTILS_H
 
-#define EXPECT_EQ(ret, expect) \
-    if ((expect) != (ret)) \
-        printf("%s:%d Not equal, ret: %d, expect: %d\n", __FILE__, __LINE__, (ret), (expect));
-
 #include <stack>
 #include <queue>
 #include <ostream>
+#include <iostream>
+#include <string>
+
+#define EXPECT_EQ(ret, expect) \
+    if ((expect) != (ret)) \
+        std::cout << __FILE__ << ":" << __LINE__ << "ret:" << std::to_string(ret) << " expect:" << std::to_string(expect) << std::endl;
+
 
 template<class Container, class Stream>
 Stream &printOneValueContainer
