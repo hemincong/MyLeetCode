@@ -13,7 +13,7 @@
 
 #define EXPECT_EQ(ret, expect) \
     if ((expect) != (ret)) \
-        std::cout << __FILE__ << ":" << __LINE__ << "ret:" << std::to_string(ret) << " expect:" << std::to_string(expect) << std::endl;
+        std::cout << __FILE__ << ":" << __LINE__ << " ret:" << std::to_string(ret) << " expect:" << std::to_string(expect) << std::endl;
 
 
 template<class Container, class Stream>
