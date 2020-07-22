@@ -20,12 +20,14 @@ public:
         int count = 0;
         bool flag = false;
         for (const auto &p : dict) {
+            // 奇数
             if (p.second % 2 != 0) {
                 flag = true;
             }
             count += (p.second / 2) * 2;
         }
         if (flag) {
+            // 奇数加回1
             count++;
         }
         return count;
