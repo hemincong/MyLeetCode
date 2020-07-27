@@ -75,16 +75,19 @@ public:
 
         auto head = 0;
         auto tail = 0;
+        auto min_head = 0;
+        auto min_tail = 0;
         auto min_length = INT32_MAX;
         string min_str;
         while (head < s.size()) {
             s_map[s[head]]++;
             bool all_contain = check_all_contain(s_map, t_set, ts);
             while (tail <= head && all_contain) {
-                auto temp_str = s.substr(tail, head - tail + 1);
-                if (temp_str.length() < min_length) {
-                    min_str = temp_str;
-                    min_length = min_str.length();
+                auto length_delta = head - tail + 1;
+                if (length_delta < min_length) {
+                    min_length = length_delta;
+                    min_head = head;
+                    min_tail = tail;
                 }
                 s_map[s[tail]]--;
                 tail++;
@@ -92,7 +95,7 @@ public:
             }
             head++;
         }
-        return min_str;
+        return min_length == INT32_MAX ? "" : s.substr(min_tail, min_head - min_tail + 1);
     }
 
 private:
