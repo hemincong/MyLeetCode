@@ -30,24 +30,25 @@ public:
 int main(int argc, char **argv) {
     Solution s;
     vector<int> case_1{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-    //EXPECT_EQ(s.maxSubArray(case_1), 6);
+    EXPECT_EQ(s.maxSubArray(case_1), 6);
 
     vector<int> case_2{1};
-    //EXPECT_EQ(s.maxSubArray(case_2), 1);
-//
+    EXPECT_EQ(s.maxSubArray(case_2), 1);
+
     vector<int> case_3{0};
-    //EXPECT_EQ(s.maxSubArray(case_3), 0);
-//
-    //vector<int> case_4{-1};
-    //EXPECT_EQ(s.maxSubArray(case_4), -1);
+    EXPECT_EQ(s.maxSubArray(case_3), 0);
+
+    vector<int> case_4{-1};
+    EXPECT_EQ(s.maxSubArray(case_4), -1);
 
     vector<int> case_5{-2147483647};
-    //EXPECT_EQ(s.maxSubArray(case_5), -2147483647);
+    EXPECT_EQ(s.maxSubArray(case_5), -2147483647);
 
     vector<int> case_6{-2, -1};
-    //EXPECT_EQ(s.maxSubArray(case_6), -1);
+    EXPECT_EQ(s.maxSubArray(case_6), -1);
 
     vector<int> case_7{-1, -2};
     EXPECT_EQ(s.maxSubArray(case_7), -1);
+
     return EXIT_SUCCESS;
 }
