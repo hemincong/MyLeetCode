@@ -15,8 +15,7 @@ public:
         vector<int> curr_change(amount + 1, -1);
 
         for (const auto &c : coins) {
-            if (c > amount) continue;
-            curr_change[c] = 1;
+            if (c <= amount) curr_change[c] = 1;
         }
 
         for (int i = 0; i <= amount; ++i) {
