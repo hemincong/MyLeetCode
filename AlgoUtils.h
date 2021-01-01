@@ -6,6 +6,7 @@
 #define LEETCODE_ALGO_UTILS_H
 
 #include <stack>
+#include <vector>
 #include <queue>
 #include <ostream>
 #include <iostream>
@@ -70,6 +71,14 @@ template<class Type, template<class c, class Container = std::deque<Type> > clas
 Stream &operator<<
         (Stream &outputstream, const Adapter<Type> &adapter) {
     return printOneValueContainer(outputstream, container(adapter));
+}
+
+template<class T>
+void printArray(std::vector<T> ret) {
+    std::cout << std::endl;
+    for (const auto &r : ret) {
+        std::cout << r << " ";
+    }
 }
 
 #endif //LEETCODE_ALGO_UTILS_H
