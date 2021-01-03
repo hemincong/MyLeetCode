@@ -11,6 +11,7 @@ using namespace std;
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int> &nums, int k) {
+        if (nums.empty()) return vector<int>();
         auto n = nums.size();
         priority_queue<pair<int, int>> slide_window;
         for (int i = 0; i < k; ++i) {
