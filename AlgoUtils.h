@@ -81,4 +81,12 @@ void printArray(std::vector<T> ret) {
     }
 }
 
+template<class T>
+void printMatrix(std::vector<std::vector<T>> m) {
+    std::cout << std::endl;
+    for (const auto &r : m) {
+        printArray(r);
+    }
+}
+
 #endif //LEETCODE_ALGO_UTILS_H
