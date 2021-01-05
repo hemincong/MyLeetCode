@@ -75,7 +75,6 @@ Stream &operator<<
 
 template<class T>
 void printArray(std::vector<T> ret) {
-    std::cout << std::endl;
     for (const auto &r : ret) {
         std::cout << r << " ";
     }
@@ -83,10 +82,12 @@ void printArray(std::vector<T> ret) {
 
 template<class T>
 void printMatrix(std::vector<std::vector<T>> m) {
-    std::cout << std::endl;
     for (const auto &r : m) {
+        std::cout << "[ ";
         printArray(r);
+        std::cout << " ]" << std::endl;
     }
+    std::cout << std::endl;
 }
 
 #endif //LEETCODE_ALGO_UTILS_H
