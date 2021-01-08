@@ -1,6 +1,7 @@
-#include <stdio.h>
 #include <string>
 #include <iostream>
+
+#include "AlgoUtils.h"
 
 using namespace std;
 
@@ -13,7 +14,6 @@ public:
         string ret;
         int longest = 0;
 
-
         for (int i = 0; i < len; ++i) {
             auto j = 0;
             while (i - j >= 0 && i + j < len && s[i - j] == s[i + j]) {
@@ -23,7 +23,7 @@ public:
                 }
                 j++;
             }
-            
+
             j = 0;
             while (i - j >= 0 && i + 1 + j < len && s[i - j] == s[i + 1 + j]) {
                 if (longest < 2 * (j + 1)) {
@@ -37,12 +37,12 @@ public:
     }
 };
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     Solution s;
-    std::cout << s.longestPalindrome("babad") << std::endl;
-    std::cout << s.longestPalindrome("cbbd") << std::endl;
-    std::cout << s.longestPalindrome("a") << std::endl;
-    std::cout << s.longestPalindrome("ac") << std::endl;
-    std::cout << s.longestPalindrome("bb") << std::endl;
+    EXPECT_EQ(s.longestPalindrome("babad"), "bab");
+    EXPECT_EQ(s.longestPalindrome("cbbd"), "bb");
+    EXPECT_EQ(s.longestPalindrome("a"), "a");
+    EXPECT_EQ(s.longestPalindrome("ac"), "a");
+    EXPECT_EQ(s.longestPalindrome("bb"), "bb");
     return EXIT_SUCCESS;
 }
