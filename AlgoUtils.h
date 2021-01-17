@@ -14,7 +14,7 @@
 
 #define EXPECT_EQ(ret, expect) \
     if ((expect) != (ret)) \
-        std::cout << __FILE__ << ":" << __LINE__ << " ret:" << std::to_string(ret) << " expect:" << std::to_string(expect) << std::endl;
+        std::cout << __FILE__ << ":" << __LINE__ << " ret:" << ret << " expect:" << expect << std::endl;
 
 #define EXPECT_TRUE(stetment) \
     if ((stetment) != (true)) \
@@ -67,7 +67,7 @@ const Container &container
     return HackedQueue::container(queue);
 }
 
-template<class Type, template<class c, class Container = std::deque<Type> > class Adapter, class Stream >
+template<class Type, template<class c, class Container = std::deque<Type> > class Adapter, class Stream>
 Stream &operator<<
         (Stream &outputstream, const Adapter<Type> &adapter) {
     return printOneValueContainer(outputstream, container(adapter));
@@ -79,6 +79,48 @@ void printArray(std::vector<T> ret) {
         std::cout << r << " ";
     }
 }
+
+template<class T>
+void printArrayErr(std::vector<T> ret) {
+    for (const auto &r : ret) {
+        std::cerr << r << " ";
+    }
+}
+
+template<class T>
+void printTwoArrayErr(std::vector<T> ret, std::vector<T> expect) {
+    std::cerr << "   ret : ";
+    printArrayErr(ret);
+    std::cerr << std::endl << "expect : ";
+    printArrayErr(expect);
+    std::cerr << std::endl;
+}
+
+template<class T>
+bool assertArray(std::vector<T> ret, std::vector<T> expect) {
+    auto iter_ret = ret.begin();
+    auto iter_expect = expect.begin();
+
+    if (ret.size() != expect.size()) {
+        std::cerr << "size not match" << std::endl;
+        printTwoArrayErr(ret, expect);
+
+        return false;
+    }
+
+    while (iter_ret != ret.end() && iter_expect != expect.end()) {
+        std::cout << *iter_ret << " ";
+        if (*iter_ret != *iter_expect) {
+            printTwoArrayErr(ret, expect);
+            return false;
+        }
+        iter_ret++;
+        iter_expect++;
+    }
+    std::cout << std::endl;
+    return true;
+}
+
 
 template<class T>
 void printMatrix(std::vector<std::vector<T>> m) {
