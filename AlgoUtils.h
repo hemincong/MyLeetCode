@@ -98,9 +98,6 @@ void printTwoArrayErr(std::vector<T> ret, std::vector<T> expect) {
 
 template<class T>
 bool assertArray(std::vector<T> ret, std::vector<T> expect) {
-    auto iter_ret = ret.begin();
-    auto iter_expect = expect.begin();
-
     if (ret.size() != expect.size()) {
         std::cerr << "size not match" << std::endl;
         printTwoArrayErr(ret, expect);
@@ -108,6 +105,8 @@ bool assertArray(std::vector<T> ret, std::vector<T> expect) {
         return false;
     }
 
+    auto iter_ret = ret.begin();
+    auto iter_expect = expect.begin();
     while (iter_ret != ret.end() && iter_expect != expect.end()) {
         std::cout << *iter_ret << " ";
         if (*iter_ret != *iter_expect) {
