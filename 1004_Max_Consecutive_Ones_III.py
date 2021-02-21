@@ -31,15 +31,15 @@ class Solution:
 
 
 if __name__ == "__main__":
-    s = Solution()
-    ret_1 = s.longestOnes([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2)
+    s = solution()
+    ret_1 = s.longestones([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2)
     print(ret_1)
     assert (ret_1 == 6)
 
-    ret_2 = s.longestOnes([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3)
+    ret_2 = s.longestones([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3)
     print(ret_2)
     assert (ret_2 == 10)
 
-    ret_3 = s.longestOnes([0, 0, 0, 0], 0)
+    ret_3 = s.longestones([0, 0, 0, 0], 0)
     print(ret_3)
     assert (ret_3 == 0)
