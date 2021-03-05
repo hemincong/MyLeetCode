@@ -4,6 +4,7 @@
 
 #include <stack>
 #include <iostream>
+#include "AlgoUtils.h"
 
 using namespace std;
 
@@ -22,58 +23,75 @@ public:
     /** Removes the element from in front of queue and returns that element. */
     int pop() {
         if (!_pop_stack.empty()) {
-            int r = _pop_stack.top();
+            auto t = _pop_stack.top();
             _pop_stack.pop();
-            return r;
+            return t;
         }
 
-        adjust();
+        // pop empty
+        _move_to_pop_stack();
 
-        auto r = _pop_stack.top();
+        auto t = _pop_stack.top();
         _pop_stack.pop();
-        return r;
+        return t;
+
     }
 
     /** Get the front element. */
     int peek() {
         if (!_pop_stack.empty()) {
-            int r = _pop_stack.top();
-            return r;
+            auto t = _pop_stack.top();
+            return t;
         }
 
-        adjust();
+        // pop empty
+        _move_to_pop_stack();
 
-        return _pop_stack.top();
+        auto t = _pop_stack.top();
+        return t;
     }
 
     /** Returns whether the queue is empty. */
     bool empty() {
-        return (_push_stack.empty() && _pop_stack.empty());
+        return _pop_stack.empty() && _push_stack.empty();
     }
 
 private:
-    void adjust() {
+    void _move_to_pop_stack() {
         while (!_push_stack.empty()) {
-            int r = _push_stack.top();
+            auto t = _push_stack.top();
+            _pop_stack.push(t);
             _push_stack.pop();
-            _pop_stack.push(r);
         }
     }
 
-    stack<int> _push_stack;
     stack<int> _pop_stack;
+    stack<int> _push_stack;
 };
 
 int main(int argc, char **argv) {
     MyQueue Q;
-    std::cout << "empty: " << Q.empty() << std::endl;
+    EXPECT_TRUE(Q.empty())
     Q.push(1);
-    std::cout << "empty: " << Q.empty() << std::endl;
+    EXPECT_FALSE(Q.empty())
     Q.push(2);
     Q.push(3);
     Q.push(4);
-    std::cout << "peek: " << Q.peek() << std::endl;
+    EXPECT_EQ(Q.peek(), 1)
     Q.pop();
-    std::cout << "peek: " << Q.peek() << std::endl;
+    EXPECT_EQ(Q.peek(), 2)
+
+    MyQueue Q_2;
+    EXPECT_TRUE(Q_2.empty());
+    Q_2.push(1);
+    Q_2.push(2);
+    Q_2.push(3);
+    Q_2.push(4);
+    EXPECT_EQ(Q_2.pop(), 1);
+    Q_2.push(5);
+    EXPECT_EQ(Q_2.pop(), 2);
+    EXPECT_EQ(Q_2.pop(), 3);
+    EXPECT_EQ(Q_2.pop(), 4);
+    EXPECT_EQ(Q_2.pop(), 5);
     return EXIT_SUCCESS;
 }
