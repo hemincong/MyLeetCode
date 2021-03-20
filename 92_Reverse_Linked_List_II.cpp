@@ -1,7 +1,6 @@
 #include <string>
-#include <iostream>
-#include <sstream>
 #include <vector>
+#include "AlgoUtils.h"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ struct ListNode {
     int val;
     ListNode *next;
 
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x) : val(x), next(nullptr) {}
 };
 
 class Solution {
@@ -45,79 +44,54 @@ public:
     }
 };
 
-void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
-        return !isspace(ch);
-    }));
-}
 
-void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
-        return !isspace(ch);
-    }).base(), input.end());
-}
+ListNode *build_list_node(const vector<int> &input) {
+    if (input.empty()) return nullptr;
 
-vector<int> stringToIntegerVector(string input) {
-    vector<int> output;
-    trimLeftTrailingSpaces(input);
-    trimRightTrailingSpaces(input);
-    input = input.substr(1, input.length() - 2);
-    stringstream ss;
-    ss.str(input);
-    string item;
-    char delim = ',';
-    while (getline(ss, item, delim)) {
-        output.push_back(stoi(item));
+    auto *root = new ListNode(input[0]);
+    auto *p = root;
+    for (int i = 1; i < input.size(); ++i) {
+        auto *tmp = new ListNode(input[i]);
+        p->next = tmp;
+        p = p->next;
     }
-    return output;
+    return root;
 }
 
-ListNode *stringToListNode(string input) {
-    // Generate list from the input
-    vector<int> list = stringToIntegerVector(input);
+vector<int> build_vector(const ListNode *root) {
+    vector<int> ret;
 
-    // Now convert that list into linked list
-    ListNode *dummyRoot = new ListNode(0);
-    ListNode *ptr = dummyRoot;
-    for (int item : list) {
-        ptr->next = new ListNode(item);
-        ptr = ptr->next;
+    auto p = root;
+    while (p) {
+        ret.push_back(p->val);
+        p = p->next;
     }
-    ptr = dummyRoot->next;
-    delete dummyRoot;
-    return ptr;
+    return ret;
 }
 
-int stringToInteger(string input) {
-    return stoi(input);
-}
-
-string listNodeToString(ListNode *node) {
-    if (node == nullptr) {
-        return "[]";
+void release_list_node(ListNode *root) {
+    auto p = root;
+    while (p) {
+        auto tmp = p->next;
+        delete p;
+        p = tmp;
     }
-
-    string result;
-    while (node) {
-        result += to_string(node->val) + ", ";
-        node = node->next;
-    }
-    return "[" + result.substr(0, result.length() - 2) + "]";
 }
+
 
 int main(int argc, char **argv) {
-    string line(argv[1]);
-    string m_s(argv[2]);
-    string n_s(argv[3]);
-    //while (getline(cin, line)) {
-    ListNode *head = stringToListNode(line);
-    int m = stringToInteger(m_s);
-    int n = stringToInteger(n_s);
+    Solution s;
+    vector<int> test_case_1{1, 2, 3, 4, 5};
+    vector<int> ret_1{1, 4, 3, 2, 5};
+    ListNode *test_case_1_root = build_list_node(test_case_1);
+    assertArray(build_vector(s.reverseBetween(test_case_1_root, 2, 4)), ret_1);
+    release_list_node(test_case_1_root);
 
-    ListNode *ret = Solution().reverseBetween(head, m, n);
+    vector<int> test_case_2{5};
+    vector<int> ret_2{5};
+    ListNode *test_case_2_root = build_list_node(test_case_2);
+    assertArray(build_vector(s.reverseBetween(test_case_2_root, 1, 1)), ret_2);
+    release_list_node(test_case_2_root);
 
-    string out = listNodeToString(ret);
-    cout << out << endl;
-    //}
-    return 0;
+    return EXIT_SUCCESS;
 }
