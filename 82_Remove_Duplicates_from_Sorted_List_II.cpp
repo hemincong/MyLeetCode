@@ -10,17 +10,6 @@
 
 using namespace std;
 
-struct ListNode {
-    int val;
-    ListNode *next;
-
-    ListNode() : val(0), next(nullptr) {}
-
-    ListNode(int x) : val(x), next(nullptr) {}
-
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
@@ -46,39 +35,6 @@ public:
         return ret;
     }
 };
-
-ListNode *build_list_node(const vector<int> &input) {
-    if (input.empty()) return nullptr;
-
-    auto *root = new ListNode(input[0]);
-    auto *p = root;
-    for (int i = 1; i < input.size(); ++i) {
-        auto *tmp = new ListNode(input[i]);
-        p->next = tmp;
-        p = p->next;
-    }
-    return root;
-}
-
-vector<int> build_vector(const ListNode *root) {
-    vector<int> ret;
-
-    auto p = root;
-    while (p) {
-        ret.push_back(p->val);
-        p = p->next;
-    }
-    return ret;
-}
-
-void release_list_node(ListNode *root) {
-    auto p = root;
-    while (p) {
-        auto tmp = p->next;
-        delete p;
-        p = tmp;
-    }
-}
 
 int main(int argc, char **argv) {
     Solution s;

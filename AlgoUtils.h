@@ -126,9 +126,60 @@ void printMatrix(std::vector<std::vector<T>> m) {
     for (const auto &r : m) {
         std::cout << "[ ";
         printArray(r);
-        std::cout << " ]" << std::endl;
+        std::cout << "]" << std::endl;
     }
     std::cout << std::endl;
+}
+
+template<class T>
+struct TreeNode {
+    T val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(T x) : val(x), left(NULL), right(NULL) {}
+};
+
+struct ListNode {
+    int val;
+    ListNode *next;
+
+    ListNode() : val(0), next(nullptr) {}
+
+    ListNode(int x) : val(x), next(nullptr) {}
+
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+ListNode *build_list_node(const std::vector<int> &input) {
+    if (input.empty()) return nullptr;
+
+    auto *root = new ListNode(input[0]);
+    auto *p = root;
+    for (int i = 1; i < input.size(); ++i) {
+        auto *tmp = new ListNode(input[i]);
+        p->next = tmp;
+        p = p->next;
+    }
+    return root;
+}
+
+std::vector<int> build_vector(const ListNode *root) {
+    std::vector<int> ret;
+
+    auto p = root;
+    while (p) {
+        ret.push_back(p->val);
+        p = p->next;
+    }
+    return ret;
+}
+
+void release_list_node(ListNode *root) {
+    auto p = root;
+    while (p) {
+        auto tmp = p->next;
+        delete p;
+        p = tmp;
+    }
 }
 
 #endif //LEETCODE_ALGO_UTILS_H
