@@ -21,30 +21,26 @@ public:
         if (k < 1) return head;
         size_t n = 0;
         auto temp = new ListNode(0, head);
-        auto p = head;
         auto old_tail = temp;
-        while (p) {
+        while (old_tail->next) {
             old_tail = old_tail->next;
-            p = p->next;
             n++;
         }
 
         auto real_offset = n - k % n;
+        // FIXME: temp head leaking
         if (real_offset < 1 || real_offset == n) return head;
 
         auto new_tail = temp;
-        auto new_head = head;
         for (int i = 0; i < real_offset; ++i) {
-            new_head = new_head->next;
             new_tail = new_tail->next;
         }
 
+        auto new_head = new_tail->next;
         new_tail->next = nullptr;
         old_tail->next = head;
-        temp->next = new_head;
-        auto ret = temp->next;
         delete temp;
-        return ret;
+        return new_head;
     }
 };
 
