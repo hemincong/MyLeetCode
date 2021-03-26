@@ -25,13 +25,14 @@ class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
         if (!head) return head;
+
         auto *tmp_head = new ListNode(0, head);
-        ListNode *p = tmp_head;
+        auto p = tmp_head;
         while (p->next && p->next->next) {
-            auto compare_value = p->next->val;
-            if (p->next->next->val == compare_value) {
-                while (p->next && p->next->val == compare_value) {
-                    auto tmp = p->next;
+            auto compare_val = p->next->val;
+            if (p->next->next->val == compare_val) {
+                while (p->next && p->next->val == compare_val) {
+                    auto *tmp = p->next;
                     p->next = p->next->next;
                     delete tmp;
                 }
@@ -39,6 +40,7 @@ public:
                 p = p->next;
             }
         }
+
         auto ret = tmp_head->next;
         delete tmp_head;
         return ret;
