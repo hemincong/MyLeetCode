@@ -20,7 +20,7 @@ public:
                 m[a] = 1;
             }
         }
-        for (auto[k, v] : m) {
+        for (auto &[k, v] : m) {
             sum += (v + k) / (k + 1) * (k + 1);
         }
         return sum;
