@@ -45,6 +45,7 @@ public:
 
 int main(int argc, char **argv) {
     Solution s;
+    Solution s_2;
     auto case_0 = vector<int>{};
     auto case_1 = vector<int>{3, 4, 5, 1, 2};
     auto case_2 = vector<int>{4, 5, 6, 7, 0, 1, 2};
@@ -55,5 +56,10 @@ int main(int argc, char **argv) {
     EXPECT_EQ(s.findMin(case_2), 0);
     EXPECT_EQ(s.findMin(case_3), 11);
     EXPECT_EQ(s.findMin(case_4), 1);
+    EXPECT_EQ(s_2.findMin(case_0), 0);
+    EXPECT_EQ(s_2.findMin(case_1), 1);
+    EXPECT_EQ(s_2.findMin(case_2), 0);
+    EXPECT_EQ(s_2.findMin(case_3), 11);
+    EXPECT_EQ(s_2.findMin(case_4), 1);
     return EXIT_SUCCESS;
 }

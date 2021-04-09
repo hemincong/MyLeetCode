@@ -19,7 +19,7 @@ public:
             if (nums[mid] > nums[r]) {
                 l = mid + 1;
             } else if (nums[mid] > nums[l]) {
-                r = mid ;
+                r = mid;
             } else {
                 r--;
             }
@@ -48,6 +48,7 @@ public:
 
 int main(int argc, char **argv) {
     Solution s;
+    Solution_2 s_2;
     auto case_0 = vector<int>{};
     auto case_1 = vector<int>{1, 3, 5};
     auto case_2 = vector<int>{2, 2, 2, 0, 1};
@@ -62,5 +63,12 @@ int main(int argc, char **argv) {
     EXPECT_EQ(s.findMin(case_4), 2);
     EXPECT_EQ(s.findMin(case_5), 2);
     EXPECT_EQ(s.findMin(case_6), 0);
+    EXPECT_EQ(s_2.findMin(case_0), 0);
+    EXPECT_EQ(s_2.findMin(case_1), 1);
+    EXPECT_EQ(s_2.findMin(case_2), 0);
+    EXPECT_EQ(s_2.findMin(case_3), 2);
+    EXPECT_EQ(s_2.findMin(case_4), 2);
+    EXPECT_EQ(s_2.findMin(case_5), 2);
+    EXPECT_EQ(s_2.findMin(case_6), 0);
     return EXIT_SUCCESS;
 }
