@@ -13,20 +13,21 @@ using namespace std;
 class Solution {
 public:
     string largestNumber(vector<int> &nums) {
-        auto n = nums.size();
-        if (n == 0) return "";
+        if (nums.empty()) return "";
 
-        vector<string> tmp;
-        tmp.reserve(nums.size());
-        for (const auto &i : nums) {
-            tmp.push_back(std::to_string(i));
+        vector<string> tmp_str;
+        tmp_str.reserve(nums.size());
+        for (auto i : nums) {
+            tmp_str.emplace_back(std::to_string(i));
         }
-        sort(tmp.begin(), tmp.end(), [](const string &s1, const string &s2) {
+        std::sort(tmp_str.begin(), tmp_str.end(), [](const string &s1, const string &s2) {
             return s1 + s2 > s2 + s1;
         });
-        if (tmp[0] == "0") return "0";
-        std::stringstream ss;
-        for (const auto &i : tmp) {
+        // 0都能做老大，其实没其他数小了
+        if (tmp_str[0] == "0") return "0";
+
+        stringstream ss;
+        for (auto &i : tmp_str) {
             ss << i;
         }
         return ss.str();
