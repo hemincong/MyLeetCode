@@ -14,20 +14,21 @@ public:
         if (n_size == 0) return 0;
         if (n_size == 1) return nums[0];
 
-        auto temp = vector<int>(nums.size(), 0);
-        temp[0] = nums[0];
-        temp[1] = nums[0] > nums[1] ? nums[0] : nums[1];
+        vector<int> dp(n_size, 0);
+        dp[0] = nums[0];
+        dp[1] = nums[0] > nums[1] ? nums[0] : nums[1];
         for (int i = 2; i < n_size; ++i) {
-            auto r_1 = temp[i - 1];
-            auto r_2 = temp[i - 2] + nums[i];
-            temp[i] = r_1 > r_2 ? r_1 : r_2;
+            dp[i] = std::max(dp[i - 1], dp[i - 2] + nums[i]);
         }
-        return temp[n_size - 1];
+        return dp[dp.size() - 1];
     }
 };
 
 int main(int argc, char **argv) {
     Solution s;
+    vector<int> test_case_0{0};
+    EXPECT_EQ(s.rob(test_case_0), 0);
+
     vector<int> test_case_1{1, 2, 3, 1};
     EXPECT_EQ(s.rob(test_case_1), 4);
 
