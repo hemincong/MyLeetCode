@@ -10,17 +10,19 @@ using namespace std;
 class Solution {
 public:
     int numWays(int steps, int arrLen) {
-        int max_col = min(arrLen - 1, steps);
-        vector<vector<int>> dp(steps + 1, vector<int>(max_col + 1, 0));
-        dp[0][0] = 1;
+        int max_col = min(arrLen - 1, steps / 2);
+        vector<int> dp(max_col + 1);
+        dp[0] = 1;
         for (int i = 1; i <= steps; i++) {
+            vector<int> dp_next(max_col + 1);
             for (int j = 0; j <= max_col; j++) {
-                dp[i][j] = dp[i - 1][j];
-                if (j - 1 >= 0) dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MODULO;
-                if (j + 1 <= arrLen) dp[i][j] = (dp[i][j] + dp[i - 1][j + 1]) % MODULO;
+                dp_next[j] = dp[j];
+                if (j - 1 >= 0) dp_next[j] = (dp_next[j] + dp[j - 1]) % MODULO;
+                if (j + 1 <= max_col) dp_next[j] = (dp_next[j] + dp[j + 1]) % MODULO;
             }
+            dp = dp_next;
         }
-        return dp[steps][0];
+        return dp[0];
     }
 
 private:
@@ -32,5 +34,6 @@ int main(int argc, char **argv) {
     EXPECT_EQ(s.numWays(3, 2), 4);
     EXPECT_EQ(s.numWays(2, 4), 2);
     EXPECT_EQ(s.numWays(4, 2), 8);
+    EXPECT_EQ(s.numWays(438, 315977), 483475137);
     return EXIT_SUCCESS;
 }
