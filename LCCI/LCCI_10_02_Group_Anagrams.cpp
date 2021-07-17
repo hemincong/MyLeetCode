@@ -15,7 +15,7 @@ public:
             m[key].emplace_back(s);
         }
         ret.reserve(m.size());
-        for (auto &p:m) {
+        for (auto &p : m) {
             ret.emplace_back(p.second);
         }
         return ret;
