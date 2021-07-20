@@ -38,6 +38,20 @@ private:
     }
 };
 
+class Solution_2 {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if (!root) return true;
+        return is_mirror(root->left, root->right);
+    }
+    bool is_mirror(TreeNode* t1, TreeNode* t2) {
+        if ((!t1 && t2) || (t1 && !t2)) return false;
+        if (!t1 && !t2) return true;
+        if (t1->val != t2->val) return false;
+
+        return is_mirror(t1->left, t2->right) && is_mirror(t1->right, t2->left);
+    }
+};
 int main(int argc, char **argv) {
     TreeNode node_root(1);
     TreeNode node_L1_0(2);
