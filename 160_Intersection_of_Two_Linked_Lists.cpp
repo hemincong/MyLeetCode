@@ -68,6 +68,41 @@ public:
     }
 };
 
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *p_a = headA;
+        ListNode *p_b = headB;
+        int len_a = 0;
+        int len_b = 0;
+        while (p_a) {
+            len_a++;
+            p_a = p_a->next;
+        }
+        while (p_b) {
+            len_b++;
+            p_b = p_b->next;
+        }
+        p_a = headA;
+        p_b = headB;
+        int delta = abs(len_b - len_a);
+        while (len_b > len_a && delta > 0) {
+            p_b = p_b->next;
+            delta--;
+        }
+        while (len_b < len_a && delta > 0) {
+            p_a = p_a->next;
+            delta--;
+        }
+        while (p_a && p_b) {
+            if (p_a == p_b) return p_a;
+            p_a = p_a->next;
+            p_b = p_b->next;
+        }
+        return NULL;
+    }
+};
+
 int stringToInteger(string input) {
     return stoi(input);
 }
