@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution_1 {
 public:
     int maxSubArray(vector<int> &nums) {
         if (nums.size() == 1) return nums.at(0);
@@ -24,6 +24,19 @@ public:
             }
         }
         return max;
+    }
+};
+
+class Solution {
+public:
+    int maxSubArray(vector<int> &nums) {
+        auto n = nums.size();
+        vector<int> dp(n, 0);
+        dp[0] = nums[0];
+        for (int i = 1; i < n; ++i) {
+            dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+        }
+        return *max_element(dp.begin(), dp.end());
     }
 };
 
