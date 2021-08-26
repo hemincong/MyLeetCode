@@ -16,11 +16,11 @@ public:
 
         vector<int> dp(n_size, 0);
         dp[0] = nums[0];
-        dp[1] = nums[0] > nums[1] ? nums[0] : nums[1];
+        dp[1] = max(nums[1], nums[0]);
         for (int i = 2; i < n_size; ++i) {
-            dp[i] = std::max(dp[i - 1], dp[i - 2] + nums[i]);
+            dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);
         }
-        return dp[dp.size() - 1];
+        return dp[n_size - 1];
     }
 };
 
