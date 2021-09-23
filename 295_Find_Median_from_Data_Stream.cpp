@@ -3,7 +3,7 @@
 //
 
 #include <queue>
-
+#include "AlgoUtils.h"
 
 class MedianFinder {
 public:
@@ -24,17 +24,18 @@ public:
         } else if (_big_queue.size() > _small_queue.size()) {
             if (num <= _big_queue.top()) {
                 auto tmp = _big_queue.top();
-                _small_queue.push(tmp);
                 _big_queue.pop();
+                _small_queue.push(tmp);
                 _big_queue.push(num);
             } else {
                 _small_queue.push(num);
             }
+
         } else if (_big_queue.size() < _small_queue.size()) {
             if (num > _small_queue.top()) {
                 auto tmp = _small_queue.top();
-                _big_queue.push(tmp);
                 _small_queue.pop();
+                _big_queue.push(tmp);
                 _small_queue.push(num);
             } else {
                 _big_queue.push(num);
@@ -57,12 +58,11 @@ private:
 };
 
 int main(int argc, char **argv) {
-    MedianFinder M;
-    int test[] = {1, 2, 3, 4, 6, 7, 8, 9, 10};
-    //int test[] = {12, 10, 13, 11, 5, 15, 1, 11, 6, 17, 14, 8, 17, 6, 4, 16, 8, 10, 2, 12, 0};
-    for (int i : test) {
-        M.addNum(i);
-        printf("========%lf\n", M.findMedian());
-    }
+    MedianFinder medianFinder;
+    medianFinder.addNum(1);
+    medianFinder.addNum(2);
+    EXPECT_EQ(medianFinder.findMedian(), 1.5);
+    medianFinder.addNum(3);
+    EXPECT_EQ(medianFinder.findMedian(), 2.0);
     return 0;
 }
