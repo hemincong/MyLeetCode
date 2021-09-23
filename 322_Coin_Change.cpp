@@ -35,7 +35,34 @@ public:
         return curr_change[amount];
     }
 };
+class Solution_2 {
+public:
+    int coinChange(vector<int> &coins, int amount) {
+        if (amount < 1) return 0;
 
+        vector<int> curr_change(amount + 1, -1);
+
+        for (const auto &c: coins) {
+            if (c <= amount) curr_change[c] = 1;
+        }
+
+        for (int i = 0; i <= amount; i++) {
+            int min_amount = INT_MAX;
+            // 如果就在coins里面小心被冲掉
+            if (curr_change[i] > 0) min_amount = curr_change[i];
+            for (const auto &c: coins) {
+                const int pos = i - c;
+
+                if (pos > 0 && curr_change[pos] > 0 && min_amount > curr_change[pos] + 1) {
+                    min_amount = curr_change[pos] + 1;
+                }
+            }
+            if (min_amount != INT_MAX) curr_change[i] = min_amount;
+        }
+
+        return curr_change[amount];
+    }
+};
 int main(int argc, char **argv) {
     Solution s;
 
