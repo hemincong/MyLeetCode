@@ -11,6 +11,19 @@ class Solution {
 public:
     int lengthOfLastWord(string s) {
         auto n = s.size();
+        int length = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            if (s[i] != ' ') length++;
+            if (s[i] == ' ' && length > 0) break;
+        }
+        return length;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        auto n = s.size();
         if (n == 0) return 0;
 
         auto i = n - 1;
