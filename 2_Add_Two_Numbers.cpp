@@ -6,7 +6,7 @@ using namespace std;
 class Solution {
 public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        ListNode *root = new ListNode(0);
+        auto *root = new ListNode(0);
         ListNode *p = root;
         int n = 0;
         while (l1 && l2) {
