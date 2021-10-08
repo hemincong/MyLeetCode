@@ -7,13 +7,14 @@ class Solution {
 public:
     int maxProfit(vector<int> &prices) {
         int n = prices.size();
-        vector<int> dp(n, 0);
         int min_prices = prices[0];
         int ret = 0;
         for (int i = 1; i < n; ++i) {
-            ret = max(ret, prices[i] - min_prices);
-            if (min_prices > prices[i])
+            if (min_prices > prices[i]) {
                 min_prices = prices[i];
+            }
+            auto temp = prices[i] - min_prices;
+            ret = max(ret, temp);
         }
         return ret;
     }
