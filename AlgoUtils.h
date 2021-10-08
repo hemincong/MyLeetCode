@@ -83,13 +83,17 @@ void printMatrix(std::vector<std::vector<T>> m) {
     std::cout << std::endl;
 }
 
-template<class T>
+
 struct TreeNode {
-    T val;
+    int val;
     TreeNode *left;
     TreeNode *right;
 
-    TreeNode(T x) : val(x), left(NULL), right(NULL) {}
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
 struct ListNode {
@@ -134,6 +138,15 @@ void release_list_node(ListNode *root) {
         delete p;
         p = tmp;
     }
+}
+
+void print_list_node(ListNode *root) {
+    auto p = root;
+    while (p) {
+        std::cout << " " << p->val;
+        p = p->next;
+    }
+    std::cout << std::endl;
 }
 
 #endif //LEETCODE_ALGO_UTILS_H
