@@ -34,3 +34,4 @@
 cmake-build-debug/
 venv
 .vscode
+CMakeLists.txt
