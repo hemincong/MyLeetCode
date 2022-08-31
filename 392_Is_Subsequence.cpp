@@ -25,6 +25,23 @@ public:
     }
 };
 
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int s_len = s.length();
+        int s_i = 0;
+        int t_len = t.length();
+        int t_i = 0;
+        while (s_i < s_len && t_i < t_len) {
+            if (s[s_i] == t[t_i]) {
+                s_i++;
+            }
+            t_i++;
+        }
+        return s_i == s_len;
+    }
+};
+
 int main(int argc, char** argv) {
     Solution s;
     assert(s.isSubsequence("abc", "ahbgdc"));
