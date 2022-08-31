@@ -6,17 +6,31 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
-        int n = prices.size();
-        int min_prices = prices[0];
-        int ret = 0;
-        for (int i = 1; i < n; ++i) {
-            if (min_prices > prices[i]) {
-                min_prices = prices[i];
+        if (prices.empty()) return 0;
+        int min_price = prices[0];
+        int max_delta = 0;
+        for (int i = 1; i < prices.size(); ++i) {
+            if (min_price > prices[i]) min_price = prices[i];
+            auto delta = prices[i] - min_price;
+            if (delta > max_delta)  {
+                max_delta = delta;
             }
-            auto temp = prices[i] - min_prices;
-            ret = max(ret, temp);
         }
-        return ret;
+        return max_delta;
+    }
+};
+
+class Solution_2 {
+public:
+    int maxProfit(vector<int> &prices) {
+        if (prices.empty()) return 0;
+        int min_price = prices[0];
+        int max_delta = INT_MIN;
+        for (auto p : prices) {
+            if (p < min_price) min_price = p;
+            if (max_delta < p - min_price) max_delta = p - min_price;
+        }
+        return max_delta;
     }
 };
 
