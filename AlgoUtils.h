@@ -24,6 +24,10 @@
     if ((stetment) == (true)) \
         std::cout << __FILE__ << ":" << __LINE__ << " ret: true expect: false" << std::endl;
 
+#define EXPECT_ALMOST_EQ(ret, expect, delta) \
+    if (fabs(expect - (ret)) > (delta)) \
+        std::cout << __FILE__ << ":" << __LINE__ << " ret:" << ret << " expect:" << expect << std::endl;
+
 
 template<class T>
 void printArray(std::vector<T> ret) {
